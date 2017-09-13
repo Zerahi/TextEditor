@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Text_Editor
             InitializeComponent();
         }
 
-    #region Methods
+        #region Methods
         #region Tabs
         private void AddTab()
         {
@@ -81,11 +82,19 @@ namespace Text_Editor
             saveFileDialog1.Filter = "RTF|*.rtf";
             saveFileDialog1.Title = "Save";
 
-            if ( saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (saveFileDialog1.FileName.Length > 0)
                 {
                     GetCurrentDocument.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                    int j = saveFileDialog1.FileName.Length;
+                    for (int i = j; i<0; i--)
+                    {
+                        bool start = true;
+                        // search for only file title remove extension and diectory                        
+                    }
+                    string name = "";
+                    tabControl1.SelectedTab.Text = name;
                 }
             }
         }
@@ -115,19 +124,64 @@ namespace Text_Editor
             }
         }
         #endregion
+        #region Function
+        private void Undo()
+        {
+            GetCurrentDocument.Undo();
+        }
+        private void Redo()
+        {
+            GetCurrentDocument.Redo();
+        }
+        private void Cut()
+        {
+            GetCurrentDocument.Cut();
+        }
+        private void Copy()
+        {
+            GetCurrentDocument.Copy();
+        }
+        private void Paste()
+        {
+            GetCurrentDocument.Paste();
+        }
+        #endregion
         #region Properties
 
         private RichTextBox GetCurrentDocument
         {
             get { return (RichTextBox)tabControl1.SelectedTab.Controls["Body"]; }
         }
-
+        private void SelectAll()
+        {
+            GetCurrentDocument.SelectAll();
+        }
         #endregion
-    #endregion
+        #region General
+        private void GetFontCollection()
+        {
+            InstalledFontCollection InsFonts = new InstalledFontCollection();
+
+            foreach (FontFamily item in InsFonts.Families)
+            {
+                toolStripComboBox1.Items.Add(item.Name);
+            }
+            toolStripComboBox1.SelectedIndex = 0;
+        }
+        private void PopulateFontSize()
+        {
+            for (int i = 1; i<=75; i++)
+            {
+                toolStripComboBox2.Items.Add(i);
+            }
+            toolStripComboBox1.SelectedIndex = 11;
+        }
+        #endregion
+        #endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            AddTab();
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -173,6 +227,96 @@ namespace Text_Editor
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Redo();
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cut();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
+
+        private void newToolStripButton1_Click(object sender, EventArgs e)
+        {
+            AddTab();
+        }
+
+        private void openToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Open();
+        }
+
+        private void saveToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void cutToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Cut();
+        }
+
+        private void copyToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void pasteToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
+
+        private void RemoveTabToolStripButton_Click(object sender, EventArgs e)
+        {
+            RemoveTab();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddTab();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveAs();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }
