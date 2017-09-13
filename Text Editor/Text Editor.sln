@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{201CD51E-71E3-4217-86F8-6AEE9C84B481}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text Editor", "Text Editor\Text Editor.csproj", "{7F5DC7A7-5E5D-4256-9A25-AF48B0A94941}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{201CD51E-71E3-4217-86F8-6AEE9C84B481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{201CD51E-71E3-4217-86F8-6AEE9C84B481}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{201CD51E-71E3-4217-86F8-6AEE9C84B481}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{201CD51E-71E3-4217-86F8-6AEE9C84B481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5DC7A7-5E5D-4256-9A25-AF48B0A94941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5DC7A7-5E5D-4256-9A25-AF48B0A94941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5DC7A7-5E5D-4256-9A25-AF48B0A94941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5DC7A7-5E5D-4256-9A25-AF48B0A94941}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AB16F7DC-4812-40F7-B44A-72D041F70663}
+		SolutionGuid = {28EB8784-97B7-4B4F-BB25-D365BA4CE2F7}
 	EndGlobalSection
 EndGlobal
