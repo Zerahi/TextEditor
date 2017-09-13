@@ -17,6 +17,52 @@ namespace Text_Editor
             InitializeComponent();
         }
 
+        #region Methods
+
+            #region Tabs
+
+            private void AddTab()
+            {
+
+            }
+
+            private void RemoveTab()
+            {
+
+            }
+
+            private void AddAllTabs()
+            {
+
+            }
+
+        #endregion
+
+        #region SaveAndOpen
+
+        private void Save()
+        {
+
+        }
+        private void SaveAs()
+        {
+
+        }
+        private void Open()
+        {
+
+        }
+
+
+            #endregion
+        #endregion
+
+
+        private void AddAllTabsButThis()
+        {
+
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -28,6 +74,41 @@ namespace Text_Editor
         }
 
         private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
         {
 
         }
