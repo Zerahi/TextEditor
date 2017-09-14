@@ -15,7 +15,7 @@ namespace Text_Editor
         {
             InitializeComponent();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             AddTab();
@@ -30,6 +30,7 @@ namespace Text_Editor
             Body.Name = "Body";
             Body.Dock = DockStyle.Fill;
             Body.ContextMenuStrip = contextMenuStrip1;
+            Body.SelectionChanged += new System.EventHandler(Update);
 
             TabPage NewPage = new TabPage();
             TabCount += 1;
@@ -41,6 +42,7 @@ namespace Text_Editor
 
             tabControl1.TabPages.Add(NewPage);
             tabControl1.ContextMenuStrip = contextMenuStrip1;
+
         }
 
         private void RemoveTab()
@@ -164,6 +166,7 @@ namespace Text_Editor
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 GetCurrentDocument.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                save = openFileDialog1.FileName;
                 int j = openFileDialog1.FileName.Length;
                 bool start = false;
                 int cs = 0;
@@ -229,6 +232,63 @@ namespace Text_Editor
         {
             GetCurrentDocument.Paste();
         }
+
+    private void Update(Object sender, EventArgs e)
+        {
+            if (GetCurrentDocument.SelectedText != null)
+            {
+                bool b = GetCurrentDocument.SelectionFont.Bold;
+                bool u = GetCurrentDocument.SelectionFont.Underline;
+                bool i = GetCurrentDocument.SelectionFont.Italic;
+                bool s = GetCurrentDocument.SelectionFont.Strikeout;
+                if (b)
+                {
+                    Bold.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+                }
+                else
+                {
+                    Bold.BackColor = Color.FromKnownColor(KnownColor.Control);
+                }
+                if (u)
+                {
+                    Underline.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+                }
+                else
+                {
+                    Underline.BackColor = Color.FromKnownColor(KnownColor.Control);
+                }
+                if (i)
+                {
+                    Italic.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+                }
+                else
+                {
+                    Italic.BackColor = Color.FromKnownColor(KnownColor.Control);
+                }
+                if (s)
+                {
+                    Strikeout.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+                }
+                toolStripComboBox1.SelectedItem = GetCurrentDocument.SelectionFont.Name;
+                toolStripComboBox2.SelectedItem = GetCurrentDocument.SelectionFont.Size;
+            }
+        }
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Font NewFont = new Font(toolStripComboBox1.SelectedItem.ToString(), GetCurrentDocument.SelectionFont.Size, GetCurrentDocument.SelectionFont.Style);
+            GetCurrentDocument.SelectionFont = NewFont;
+        }
+
+        private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            float NewSize;
+
+            float.TryParse(toolStripComboBox2.SelectedItem.ToString(), out NewSize);
+
+            Font NewFont = new Font(GetCurrentDocument.SelectionFont.Name, NewSize, GetCurrentDocument.SelectionFont.Style);
+
+            GetCurrentDocument.SelectionFont = NewFont;
+        }
         #endregion
         #region Properties
 
@@ -236,6 +296,9 @@ namespace Text_Editor
         {
             get { return (RichTextBox)tabControl1.SelectedTab.Controls["Body"]; }
         }
+
+        public object ColorDialog1 { get; private set; }
+
         private void SelectAll()
         {
             GetCurrentDocument.SelectAll();
@@ -250,7 +313,7 @@ namespace Text_Editor
             {
                 toolStripComboBox1.Items.Add(item.Name);
             }
-            toolStripComboBox1.SelectedIndex = 0;
+            toolStripComboBox1.SelectedIndex = 1;
         }
         private void PopulateFontSize()
         {
@@ -286,18 +349,38 @@ namespace Text_Editor
             if (b)
             {
                 Style = FontStyle.Bold;
+                Bold.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+            else
+            {
+                Bold.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
             if (u)
             {
                 Style = Style | FontStyle.Underline;
+                Underline.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+            else
+            {
+                Underline.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
             if (i)
             {
                 Style = Style | FontStyle.Italic;
+                Italic.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+            else
+            {
+                Italic.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
             if (s)
             {
                 Style = Style | FontStyle.Strikeout;
+                Strikeout.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+            else
+            {
+                Strikeout.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
             GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.SelectionFont, Style);
         }
@@ -435,45 +518,36 @@ namespace Text_Editor
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if(GetCurrentDocument.SelectionLength != 0)
-            {
-                Style(FontStyle.Bold);
-            }
+            Style(FontStyle.Bold);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if (GetCurrentDocument.SelectionLength != 0)
-            {
-                Style(FontStyle.Italic);
-            }
+             Style(FontStyle.Italic);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if (GetCurrentDocument.SelectionLength != 0)
-            {
-                Style(FontStyle.Underline);
-            }
+             Style(FontStyle.Underline);
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-
-            if (GetCurrentDocument.SelectionLength != 0)
-            {
-                Style(FontStyle.Strikeout);
-            }
+            Style(FontStyle.Strikeout);
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
+            int selection = GetCurrentDocument.SelectionLength;
             GetCurrentDocument.SelectedText = GetCurrentDocument.SelectedText.ToUpper();
+            GetCurrentDocument.Select(GetCurrentDocument.SelectionStart-selection, GetCurrentDocument.SelectionStart);
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
+            int selection = GetCurrentDocument.SelectionLength;
             GetCurrentDocument.SelectedText = GetCurrentDocument.SelectedText.ToLower();
+            GetCurrentDocument.Select(GetCurrentDocument.SelectionStart - selection, GetCurrentDocument.SelectionStart);
         }
 
         private void toolStripButton8_Click(object sender, EventArgs e)
@@ -493,57 +567,28 @@ namespace Text_Editor
             toolStripComboBox2.SelectedIndex = Convert.ToInt32(FontSize-2);
         }
 
-        #endregion
-        #region Unused
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void toolStripButton7_Click(object sender, EventArgs e)
         {
-
+            if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                GetCurrentDocument.SelectionColor = colorDialog1.Color;
+            }
+        }
+        private void HighlightGreen_Click(object sender, EventArgs e)
+        {
+            GetCurrentDocument.SelectionBackColor = Color.FromArgb(45, 255, 52);
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void HighlightYellow_Click(object sender, EventArgs e)
         {
-
+            GetCurrentDocument.SelectionBackColor = Color.FromArgb(255, 243, 25);
         }
 
-        private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
+        private void HighlightOrange_Click(object sender, EventArgs e)
         {
-
+            GetCurrentDocument.SelectionBackColor = Color.FromArgb(255, 180, 40);
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
         #endregion
     }
 }
