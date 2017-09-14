@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Text_Editor
@@ -20,7 +15,13 @@ namespace Text_Editor
             InitializeComponent();
         }
 
-        #region Methods
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AddTab();
+            GetFontCollection();
+            PopulateFontSize();            
+        }
+
         #region Tabs
         private void AddTab()
         {
@@ -75,7 +76,6 @@ namespace Text_Editor
             }
         }
         #endregion
-
         #region SaveAndOpen
         private void Save()
         {
@@ -251,64 +251,51 @@ namespace Text_Editor
             }
             toolStripComboBox1.SelectedIndex = 11;
         }
+
+        private void Style(FontStyle input)
+        {
+            bool b = GetCurrentDocument.SelectionFont.Bold;
+            bool u = GetCurrentDocument.SelectionFont.Underline;
+            bool i = GetCurrentDocument.SelectionFont.Italic;
+            bool s = GetCurrentDocument.SelectionFont.Strikeout;
+            switch (input)
+            {
+                case FontStyle.Bold:
+                    b = b ? false : true; 
+                    break;
+                case FontStyle.Underline:
+                    u = u ? false : true;
+                    break;
+                case FontStyle.Italic:
+                    i = i ? false : true;
+                    break;
+                case FontStyle.Strikeout:
+                    s = s ? false : true;
+                    break;
+            }
+            FontStyle Style = FontStyle.Regular;
+            if (b)
+            {
+                Style = FontStyle.Bold;
+            }
+            if (u)
+            {
+                Style = Style | FontStyle.Underline;
+            }
+            if (i)
+            {
+
+                Style = Style | FontStyle.Italic;
+            }
+            if (s)
+            {
+                Style = Style | FontStyle.Strikeout;
+            }
+
+            GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.Font, Style);
+        }
         #endregion
-        #endregion
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            AddTab();
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
+        #region Buttons
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Undo();
@@ -441,18 +428,91 @@ namespace Text_Editor
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            Font BoldFont = new Font(GetCurrentDocument.SelectionFont.FontFamily, GetCurrentDocument.SelectionFont.SizeInPoints, FontStyle.Bold);
-            Font RegularFont = new Font(GetCurrentDocument.SelectionFont.FontFamily, GetCurrentDocument.SelectionFont.SizeInPoints, FontStyle.Regular);
-
-            if (GetCurrentDocument.SelectionFont == BoldFont)
+            if(GetCurrentDocument.SelectionLength != 0)
             {
-
-                GetCurrentDocument.SelectionFont = RegularFont;
-            }
-            else
-            {
-                    GetCurrentDocument.SelectionFont = BoldFont;
+                Style(FontStyle.Bold);
             }
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (GetCurrentDocument.SelectionLength != 0)
+            {
+                Style(FontStyle.Italic);
+            }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (GetCurrentDocument.SelectionLength != 0)
+            {
+                Style(FontStyle.Underline);
+            }
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            if (GetCurrentDocument.SelectionLength != 0)
+            {
+                Style(FontStyle.Strikeout);
+            }
+        }
+        #endregion
+        #region Unused
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
