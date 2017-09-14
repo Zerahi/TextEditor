@@ -461,6 +461,7 @@
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "U";
             this.toolStripButton3.ToolTipText = "Underline";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton4
             // 
@@ -472,6 +473,7 @@
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "S";
             this.toolStripButton4.ToolTipText = "Strikeout";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripSeparator1
             // 
@@ -488,6 +490,7 @@
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton5.Text = "A";
             this.toolStripButton5.ToolTipText = "Uppercase";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripButton6
             // 
@@ -499,6 +502,7 @@
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "a";
             this.toolStripButton6.ToolTipText = "Lowercase";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // toolStripSeparator10
             // 
@@ -515,6 +519,7 @@
             this.toolStripButton8.Size = new System.Drawing.Size(27, 22);
             this.toolStripButton8.Text = "A+";
             this.toolStripButton8.ToolTipText = "Increase Font Size";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // toolStripButton9
             // 

@@ -249,7 +249,7 @@ namespace Text_Editor
             {
                 toolStripComboBox2.Items.Add(i);
             }
-            toolStripComboBox1.SelectedIndex = 11;
+            toolStripComboBox2.SelectedIndex = 7;
         }
 
         private void Style(FontStyle input)
@@ -284,15 +284,13 @@ namespace Text_Editor
             }
             if (i)
             {
-
                 Style = Style | FontStyle.Italic;
             }
             if (s)
             {
                 Style = Style | FontStyle.Strikeout;
             }
-
-            GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.Font, Style);
+            GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.SelectionFont, Style);
         }
         #endregion
         #region Buttons
@@ -452,11 +450,40 @@ namespace Text_Editor
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
+
             if (GetCurrentDocument.SelectionLength != 0)
             {
                 Style(FontStyle.Strikeout);
             }
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            GetCurrentDocument.SelectedText = GetCurrentDocument.SelectedText.ToUpper();
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            GetCurrentDocument.SelectedText = GetCurrentDocument.SelectedText.ToLower();
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            if (GetCurrentDocument.SelectedText.Length > 0)
+            {
+                float FontSize = GetCurrentDocument.SelectionFont.SizeInPoints ;
+                GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.SelectionFont.Name, FontSize+1, GetCurrentDocument.SelectionFont.Style);
+                toolStripComboBox2.SelectedIndex = Convert.ToInt32(FontSize);
+            }
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            float FontSize = GetCurrentDocument.SelectionFont.SizeInPoints;
+            GetCurrentDocument.SelectionFont = new Font(GetCurrentDocument.SelectionFont.Name, FontSize - 1, GetCurrentDocument.SelectionFont.Style);
+            toolStripComboBox2.SelectedIndex = Convert.ToInt32(FontSize-2);
+        }
+
         #endregion
         #region Unused
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -500,11 +527,6 @@ namespace Text_Editor
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton9_Click(object sender, EventArgs e)
         {
 
         }
