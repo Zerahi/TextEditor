@@ -176,7 +176,7 @@
             this.openToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton1.Image")));
             this.openToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton1.Name = "openToolStripButton1";
-            this.openToolStripButton1.Size = new System.Drawing.Size(30, 20);
+            this.openToolStripButton1.Size = new System.Drawing.Size(22, 20);
             this.openToolStripButton1.Text = "&Open";
             this.openToolStripButton1.Click += new System.EventHandler(this.openToolStripButton1_Click);
             // 
@@ -186,14 +186,14 @@
             this.saveToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton1.Image")));
             this.saveToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton1.Name = "saveToolStripButton1";
-            this.saveToolStripButton1.Size = new System.Drawing.Size(30, 20);
+            this.saveToolStripButton1.Size = new System.Drawing.Size(22, 20);
             this.saveToolStripButton1.Text = "&Save";
             this.saveToolStripButton1.Click += new System.EventHandler(this.saveToolStripButton1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(30, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(22, 6);
             // 
             // cutToolStripButton1
             // 
@@ -201,7 +201,7 @@
             this.cutToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton1.Image")));
             this.cutToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripButton1.Name = "cutToolStripButton1";
-            this.cutToolStripButton1.Size = new System.Drawing.Size(30, 20);
+            this.cutToolStripButton1.Size = new System.Drawing.Size(22, 20);
             this.cutToolStripButton1.Text = "C&ut";
             this.cutToolStripButton1.Click += new System.EventHandler(this.cutToolStripButton1_Click);
             // 
@@ -211,7 +211,7 @@
             this.copyToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton1.Image")));
             this.copyToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripButton1.Name = "copyToolStripButton1";
-            this.copyToolStripButton1.Size = new System.Drawing.Size(30, 20);
+            this.copyToolStripButton1.Size = new System.Drawing.Size(22, 20);
             this.copyToolStripButton1.Text = "&Copy";
             this.copyToolStripButton1.Click += new System.EventHandler(this.copyToolStripButton1_Click);
             // 
@@ -221,14 +221,14 @@
             this.pasteToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton1.Image")));
             this.pasteToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripButton1.Name = "pasteToolStripButton1";
-            this.pasteToolStripButton1.Size = new System.Drawing.Size(30, 20);
+            this.pasteToolStripButton1.Size = new System.Drawing.Size(22, 20);
             this.pasteToolStripButton1.Text = "&Paste";
             this.pasteToolStripButton1.Click += new System.EventHandler(this.pasteToolStripButton1_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(30, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(22, 6);
             // 
             // RemoveTabToolStripButton
             // 
@@ -237,7 +237,7 @@
             this.RemoveTabToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveTabToolStripButton.Image")));
             this.RemoveTabToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RemoveTabToolStripButton.Name = "RemoveTabToolStripButton";
-            this.RemoveTabToolStripButton.Size = new System.Drawing.Size(30, 19);
+            this.RemoveTabToolStripButton.Size = new System.Drawing.Size(22, 19);
             this.RemoveTabToolStripButton.Text = "X";
             this.RemoveTabToolStripButton.Click += new System.EventHandler(this.RemoveTabToolStripButton_Click);
             // 
@@ -291,7 +291,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -313,7 +313,7 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -423,7 +423,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(3, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(616, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolStripButton1
@@ -435,6 +435,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "B";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton2
             // 
@@ -641,12 +642,14 @@
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
             this.undoToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
+            this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
             // redoToolStripMenuItem1
             // 
             this.redoToolStripMenuItem1.Name = "redoToolStripMenuItem1";
             this.redoToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.redoToolStripMenuItem1.Text = "Redo";
+            this.redoToolStripMenuItem1.Click += new System.EventHandler(this.redoToolStripMenuItem1_Click);
             // 
             // toolStripSeparator11
             // 
@@ -658,18 +661,21 @@
             this.cutToolStripMenuItem1.Name = "cutToolStripMenuItem1";
             this.cutToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.cutToolStripMenuItem1.Text = "Cut";
+            this.cutToolStripMenuItem1.Click += new System.EventHandler(this.cutToolStripMenuItem1_Click);
             // 
             // copyToolStripMenuItem1
             // 
             this.copyToolStripMenuItem1.Name = "copyToolStripMenuItem1";
             this.copyToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.copyToolStripMenuItem1.Text = "Copy";
+            this.copyToolStripMenuItem1.Click += new System.EventHandler(this.copyToolStripMenuItem1_Click);
             // 
             // pasteToolStripMenuItem1
             // 
             this.pasteToolStripMenuItem1.Name = "pasteToolStripMenuItem1";
             this.pasteToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.pasteToolStripMenuItem1.Text = "Paste";
+            this.pasteToolStripMenuItem1.Click += new System.EventHandler(this.pasteToolStripMenuItem1_Click);
             // 
             // toolStripSeparator12
             // 
@@ -681,24 +687,28 @@
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
             this.saveToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
             this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.closeAllToolStripMenuItem.Text = "Close All";
+            this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
             // 
             // closeAllButThisToolStripMenuItem
             // 
             this.closeAllButThisToolStripMenuItem.Name = "closeAllButThisToolStripMenuItem";
             this.closeAllButThisToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.closeAllButThisToolStripMenuItem.Text = "Close All But This";
+            this.closeAllButThisToolStripMenuItem.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem_Click);
             // 
             // Back
             // 

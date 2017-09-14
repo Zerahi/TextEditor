@@ -38,6 +38,7 @@ namespace Text_Editor
             NewPage.Controls.Add(Body);
 
             tabControl1.TabPages.Add(NewPage);
+            tabControl1.ContextMenuStrip = contextMenuStrip1;
         }
 
         private void RemoveTab()
@@ -59,6 +60,7 @@ namespace Text_Editor
             {
                 tabControl1.TabPages.Remove(Page);
             }
+            TabCount = 0;
             AddTab();
         }
 
@@ -88,13 +90,45 @@ namespace Text_Editor
                 {
                     GetCurrentDocument.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
                     int j = saveFileDialog1.FileName.Length;
-                    for (int i = j; i<0; i--)
+                    bool start = false;
+                    int cs = 0;
+                    int ce = 0;
+                    for (int i = j-1; i>-1; i--)
                     {
-                        bool start = true;
-                        // search for only file title remove extension and diectory                        
+                        if (start == false)
+                        {
+                            if (saveFileDialog1.FileName.Substring(i,1) != ".")
+                            {
+                                cs++;
+                            }
+                            else
+                            {
+                                cs++;
+                                start = true;
+                                ce = cs;
+                            }
+                        }
+                        else
+                        {
+                            if (saveFileDialog1.FileName.Substring(i, 1) != "\\")
+                            {
+                                ce++;
+                            } else
+                            {
+                                i = 0;
+                            }
+                        }
                     }
-                    string name = "";
-                    tabControl1.SelectedTab.Text = name;
+                    int diff = ce - cs;
+                    string name = saveFileDialog1.FileName.Substring(j-ce, diff);
+                    if (name.Length <= 6)
+                    {
+                        tabControl1.SelectedTab.Text = name;
+                    }
+                    else
+                    {
+                        tabControl1.SelectedTab.Text = name.Substring(0,5)+ ".";
+                    }
                 }
             }
         }
@@ -121,6 +155,47 @@ namespace Text_Editor
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 GetCurrentDocument.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                int j = openFileDialog1.FileName.Length;
+                bool start = false;
+                int cs = 0;
+                int ce = 0;
+                for (int i = j - 1; i > -1; i--)
+                {
+                    if (start == false)
+                    {
+                        if (openFileDialog1.FileName.Substring(i, 1) != ".")
+                        {
+                            cs++;
+                        }
+                        else
+                        {
+                            cs++;
+                            start = true;
+                            ce = cs;
+                        }
+                    }
+                    else
+                    {
+                        if (openFileDialog1.FileName.Substring(i, 1) != "\\")
+                        {
+                            ce++;
+                        }
+                        else
+                        {
+                            i = 0;
+                        }
+                    }
+                }
+                int diff = ce - cs;
+                string name = openFileDialog1.FileName.Substring(j - ce, diff);
+                if (name.Length <= 6)
+                {
+                    tabControl1.SelectedTab.Text = name;
+                }
+                else
+                {
+                    tabControl1.SelectedTab.Text = name.Substring(0, 5) + ".";
+                }
             }
         }
         #endregion
@@ -317,6 +392,67 @@ namespace Text_Editor
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void redoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Redo();
+        }
+
+        private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Cut();
+        }
+
+        private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveTab();
+        }
+
+        private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveAllTabs();
+        }
+
+        private void closeAllButThisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveAllTabsButThisOne();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Font BoldFont = new Font(GetCurrentDocument.SelectionFont.FontFamily, GetCurrentDocument.SelectionFont.SizeInPoints, FontStyle.Bold);
+            Font RegularFont = new Font(GetCurrentDocument.SelectionFont.FontFamily, GetCurrentDocument.SelectionFont.SizeInPoints, FontStyle.Regular);
+
+            if (GetCurrentDocument.SelectionFont == BoldFont)
+            {
+
+                GetCurrentDocument.SelectionFont = RegularFont;
+            }
+            else
+            {
+                    GetCurrentDocument.SelectionFont = BoldFont;
+            }
         }
     }
 }
