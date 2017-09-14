@@ -9,6 +9,7 @@ namespace Text_Editor
     public partial class Back : Form
     {
         private int TabCount = 0;
+        private string save = "";
 
         public Back()
         {
@@ -79,64 +80,71 @@ namespace Text_Editor
         #region SaveAndOpen
         private void Save()
         {
-            saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
+            saveFileDialog1.FileName = tabControl1.SelectedTab.Text;
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog1.Filter = "RTF|*.rtf";
             saveFileDialog1.Title = "Save";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (save == "")
             {
-                if (saveFileDialog1.FileName.Length > 0)
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    GetCurrentDocument.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
-                    int j = saveFileDialog1.FileName.Length;
-                    bool start = false;
-                    int cs = 0;
-                    int ce = 0;
-                    for (int i = j-1; i>-1; i--)
+                    if (saveFileDialog1.FileName.Length > 0)
                     {
-                        if (start == false)
+                        GetCurrentDocument.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                        save = saveFileDialog1.FileName;
+                        int j = saveFileDialog1.FileName.Length;
+                        bool start = false;
+                        int cs = 0;
+                        int ce = 0;
+                        for (int i = j - 1; i > -1; i--)
                         {
-                            if (saveFileDialog1.FileName.Substring(i,1) != ".")
+                            if (start == false)
                             {
-                                cs++;
+                                if (saveFileDialog1.FileName.Substring(i, 1) != ".")
+                                {
+                                    cs++;
+                                }
+                                else
+                                {
+                                    cs++;
+                                    start = true;
+                                    ce = cs;
+                                }
                             }
                             else
                             {
-                                cs++;
-                                start = true;
-                                ce = cs;
+                                if (saveFileDialog1.FileName.Substring(i, 1) != "\\")
+                                {
+                                    ce++;
+                                } else
+                                {
+                                    i = 0;
+                                }
                             }
+                        }
+                        int diff = ce - cs;
+                        string name = saveFileDialog1.FileName.Substring(j - ce, diff);
+                        if (name.Length <= 6)
+                        {
+                            tabControl1.SelectedTab.Text = name;
                         }
                         else
                         {
-                            if (saveFileDialog1.FileName.Substring(i, 1) != "\\")
-                            {
-                                ce++;
-                            } else
-                            {
-                                i = 0;
-                            }
+                            tabControl1.SelectedTab.Text = name.Substring(0, 5) + ".";
                         }
                     }
-                    int diff = ce - cs;
-                    string name = saveFileDialog1.FileName.Substring(j-ce, diff);
-                    if (name.Length <= 6)
-                    {
-                        tabControl1.SelectedTab.Text = name;
-                    }
-                    else
-                    {
-                        tabControl1.SelectedTab.Text = name.Substring(0,5)+ ".";
-                    }
                 }
+            }
+            else
+            {
+                GetCurrentDocument.SaveFile(save, RichTextBoxStreamType.RichText);
             }
         }
         private void SaveAs()
         {
             saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            saveFileDialog1.Filter = "Text Files|*.txt|VB Files|*.vb|C# Files|*.cs|All Files|*.*";
+            saveFileDialog1.Filter = "RTF|*.rtf|Text Files|*.txt|VB Files|*.vb|C# Files|*.cs|All Files|*.*";
             saveFileDialog1.Title = "Save As";
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -144,6 +152,7 @@ namespace Text_Editor
                 if (saveFileDialog1.FileName.Length > 0)
                 {
                     GetCurrentDocument.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                    save = saveFileDialog1.FileName;
                 }
             }
         }
