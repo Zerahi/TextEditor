@@ -19,8 +19,8 @@ namespace Text_Editor
         private void Form1_Load(object sender, EventArgs e)
         {
             AddTab();
+            PopulateFontSize();
             GetFontCollection();
-            PopulateFontSize();            
         }
 
         #region Tabs
@@ -33,7 +33,8 @@ namespace Text_Editor
             Body.SelectionChanged += new System.EventHandler(Update);
 
             TabPage NewPage = new TabPage();
-            TabCount += 1;
+            TabCount++;
+            statusStrip1.Text = TabCount.ToString();
 
             string DocumentText = "Document " + TabCount;
             NewPage.Name = DocumentText;
@@ -41,8 +42,7 @@ namespace Text_Editor
             NewPage.Controls.Add(Body);
 
             tabControl1.TabPages.Add(NewPage);
-            tabControl1.ContextMenuStrip = contextMenuStrip1;
-
+            toolStripStatusLabel1.Text = TabCount.ToString();
         }
 
         private void RemoveTab()
@@ -50,10 +50,13 @@ namespace Text_Editor
             if (tabControl1.TabPages.Count != 1)
             {
                 tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                TabCount--;
+                toolStripStatusLabel1.Text = TabCount.ToString();
             }
             else
             {
                 tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                TabCount--;
                 AddTab();
             }
         }
@@ -75,6 +78,8 @@ namespace Text_Editor
                 if (Page.Name != tabControl1.SelectedTab.Name)
                 {
                     tabControl1.TabPages.Remove(Page);
+                    TabCount = 1;
+                    toolStripStatusLabel1.Text = TabCount.ToString();
                 }
             }
         }
@@ -233,9 +238,9 @@ namespace Text_Editor
             GetCurrentDocument.Paste();
         }
 
-    private void Update(Object sender, EventArgs e)
+        private void Update(Object sender, EventArgs e)
         {
-            if (GetCurrentDocument.SelectedText != null)
+            if (GetCurrentDocument.SelectionFont != null)
             {
                 bool b = GetCurrentDocument.SelectionFont.Bold;
                 bool u = GetCurrentDocument.SelectionFont.Underline;
@@ -270,7 +275,7 @@ namespace Text_Editor
                     Strikeout.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
                 }
                 toolStripComboBox1.SelectedItem = GetCurrentDocument.SelectionFont.Name;
-                toolStripComboBox2.SelectedItem = GetCurrentDocument.SelectionFont.Size;
+                toolStripComboBox2.SelectedIndex = Convert.ToInt32(GetCurrentDocument.SelectionFont.Size)-1;
             }
         }
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
